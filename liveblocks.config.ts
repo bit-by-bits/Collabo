@@ -61,5 +61,5 @@ export const {
     async resolveMentionSuggestions({ text, roomId }) {
       return [];
     },
-  }
+  },
 );

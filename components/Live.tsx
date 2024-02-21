@@ -19,12 +19,12 @@ import ReactionSelector from "./reaction/ReactionButton";
 import LiveCursors from "./cursor/LiveCursors";
 
 type Props = {
-  canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
+  canvas: React.MutableRefObject<HTMLCanvasElement | null>;
   undo: () => void;
   redo: () => void;
 };
 
-const Live = ({ canvasRef, undo, redo }: Props) => {
+const Live = ({ canvas, undo, redo }: Props) => {
   const others = useOthers();
   const [{ cursor }, updateMyPresence] = useMyPresence() as any;
   const broadcast = useBroadcastEvent();
@@ -39,7 +39,7 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
 
   useInterval(() => {
     setReactions((reactions) =>
-      reactions.filter((reaction) => reaction.timestamp > Date.now() - 4000)
+      reactions.filter((reaction) => reaction.timestamp > Date.now() - 4000),
     );
   }, 1000);
 
@@ -56,7 +56,7 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
             value: cursorState.reaction,
             timestamp: Date.now(),
           },
-        ])
+        ]),
       );
       broadcast({ x: cursor.x, y: cursor.y, value: cursorState.reaction });
     }
@@ -93,61 +93,70 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
     };
   }, [updateMyPresence]);
 
-  const handlePointerMove = useCallback((event: React.PointerEvent) => {
-    event.preventDefault();
-    if (cursor == null || cursorState.mode !== CursorMode.ReactionSelector) {
-      const x = event.clientX - event.currentTarget.getBoundingClientRect().x;
-      const y = event.clientY - event.currentTarget.getBoundingClientRect().y;
-      updateMyPresence({ cursor: { x, y } });
-    }
-  }, []);
+  const handlePointerMove = useCallback(
+    (event: React.PointerEvent) => {
+      event.preventDefault();
+      if (cursor == null || cursorState.mode !== CursorMode.ReactionSelector) {
+        const x = event.clientX - event.currentTarget.getBoundingClientRect().x;
+        const y = event.clientY - event.currentTarget.getBoundingClientRect().y;
+        updateMyPresence({ cursor: { x, y } });
+      }
+    },
+    [cursor, cursorState.mode, updateMyPresence],
+  );
 
   const handlePointerLeave = useCallback(() => {
     setCursorState({ mode: CursorMode.Hidden });
     updateMyPresence({ cursor: null, message: null });
-  }, []);
+  }, [updateMyPresence]);
 
-  const handlePointerDown = useCallback((event: React.PointerEvent) => {
-    const x = event.clientX - event.currentTarget.getBoundingClientRect().x;
-    const y = event.clientY - event.currentTarget.getBoundingClientRect().y;
-    updateMyPresence({ cursor: { x, y } });
-    setCursorState((state: CursorState) =>
-      cursorState.mode === CursorMode.Reaction
-        ? { ...state, isPressed: true }
-        : state
-    );
-  }, []);
+  const handlePointerDown = useCallback(
+    (event: React.PointerEvent) => {
+      const x = event.clientX - event.currentTarget.getBoundingClientRect().x;
+      const y = event.clientY - event.currentTarget.getBoundingClientRect().y;
+      updateMyPresence({ cursor: { x, y } });
+      setCursorState((state: CursorState) =>
+        cursorState.mode === CursorMode.Reaction
+          ? { ...state, isPressed: true }
+          : state,
+      );
+    },
+    [cursorState.mode, updateMyPresence],
+  );
 
   const handlePointerUp = useCallback(() => {
     setCursorState((state: CursorState) =>
       cursorState.mode === CursorMode.Reaction
         ? { ...state, isPressed: false }
-        : state
+        : state,
     );
-  }, []);
+  }, [cursorState.mode]);
 
-  const handleContextMenuClick = useCallback((key: string) => {
-    switch (key) {
-      case "Chat":
-        setCursorState({
-          mode: CursorMode.Chat,
-          previousMessage: null,
-          message: "",
-        });
-        break;
-      case "Reactions":
-        setCursorState({ mode: CursorMode.ReactionSelector });
-        break;
-      case "Undo":
-        undo();
-        break;
-      case "Redo":
-        redo();
-        break;
-      default:
-        break;
-    }
-  }, []);
+  const handleContextMenuClick = useCallback(
+    (key: string) => {
+      switch (key) {
+        case "Chat":
+          setCursorState({
+            mode: CursorMode.Chat,
+            previousMessage: null,
+            message: "",
+          });
+          break;
+        case "Reactions":
+          setCursorState({ mode: CursorMode.ReactionSelector });
+          break;
+        case "Undo":
+          undo();
+          break;
+        case "Redo":
+          redo();
+          break;
+        default:
+          break;
+      }
+    },
+    [redo, undo, setCursorState],
+  );
 
   return (
     <ContextMenu>
@@ -162,7 +171,7 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
       >
-        <canvas ref={canvasRef} />
+        <canvas ref={canvas} />
         {reactions.map((reaction) => (
           <FlyingReaction
             key={reaction.timestamp.toString()}

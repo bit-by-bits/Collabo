@@ -15,6 +15,7 @@
     "@liveblocks/react": "^1.9.8",
     "@liveblocks/react-comments": "^1.9.8",
     "@radix-ui/react-context-menu": "^2.1.5",
+    "@radix-ui/react-tooltip": "^1.0.7",
     "@types/fabric": "^5.3.7",
     "@types/uuid": "^9.0.8",
     "class-variance-authority": "^0.7.0",

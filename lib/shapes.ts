@@ -62,7 +62,7 @@ const createText = (pointer: PointerEvent, text: string) =>
 // Function to create a shape based on type
 export const createSpecificShape = (
   shapeType: string,
-  pointer: PointerEvent
+  pointer: PointerEvent,
 ) => {
   switch (shapeType) {
     case "rectangle":
@@ -109,7 +109,7 @@ export const handleImageUpload = ({
 export const createShape = (
   canvas: fabric.Canvas,
   pointer: PointerEvent,
-  shapeType: string
+  shapeType: string,
 ) => {
   if (shapeType === "freeform") {
     canvas.isDrawingMode = true;
