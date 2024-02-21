@@ -1,5 +1,5 @@
 import React from "react";
 
-const Home = () => <main>Hello World</main>;
-
-export default Home;
+export default function App() {
+  return <main>Hello World</main>;
+}

@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
 import { twMerge } from "tailwind-merge";
-import { type ClassValue, clsx } from "clsx";
+import { clsx, ClassValue } from "clsx";
 
 const adjectives = [
   "Happy",
@@ -46,76 +46,42 @@ export function generateRandomName(): string {
   return `${randomAdjective} ${randomAnimal}`;
 }
 
-export const getShapeInfo = (shapeType: string) => {
-  switch (shapeType) {
-    case "rect":
-      return {
-        icon: "/assets/rectangle.svg",
-        name: "Rectangle",
-      };
+interface ShapeInfo {
+  icon: string;
+  name: string;
+}
 
-    case "circle":
-      return {
-        icon: "/assets/circle.svg",
-        name: "Circle",
-      };
+const shapeInfoMap: Record<string, ShapeInfo> = {
+  rect: { icon: "/assets/rectangle.svg", name: "Rectangle" },
+  circle: { icon: "/assets/circle.svg", name: "Circle" },
+  triangle: { icon: "/assets/triangle.svg", name: "Triangle" },
+  line: { icon: "/assets/line.svg", name: "Line" },
+  "i-text": { icon: "/assets/text.svg", name: "Text" },
+  image: { icon: "/assets/image.svg", name: "Image" },
+  freeform: { icon: "/assets/freeform.svg", name: "Free Drawing" },
+};
 
-    case "triangle":
-      return {
-        icon: "/assets/triangle.svg",
-        name: "Triangle",
-      };
-
-    case "line":
-      return {
-        icon: "/assets/line.svg",
-        name: "Line",
-      };
-
-    case "i-text":
-      return {
-        icon: "/assets/text.svg",
-        name: "Text",
-      };
-
-    case "image":
-      return {
-        icon: "/assets/image.svg",
-        name: "Image",
-      };
-
-    case "freeform":
-      return {
-        icon: "/assets/freeform.svg",
-        name: "Free Drawing",
-      };
-
-    default:
-      return {
-        icon: "/assets/rectangle.svg",
-        name: shapeType,
-      };
-  }
+export const getShapeInfo = (shapeType: string): ShapeInfo => {
+  return (
+    shapeInfoMap[shapeType] || {
+      icon: "/assets/rectangle.svg",
+      name: shapeType,
+    }
+  );
 };
 
 export const exportToPdf = () => {
   const canvas = document.querySelector("canvas");
-
   if (!canvas) return;
 
-  // use jspdf
   const doc = new jsPDF({
     orientation: "landscape",
     unit: "px",
     format: [canvas.width, canvas.height],
   });
 
-  // get the canvas data url
-  const data = canvas.toDataURL();
+  const data = canvas.toDataURL("image/png");
 
-  // add the image to the pdf
   doc.addImage(data, "PNG", 0, 0, canvas.width, canvas.height);
-
-  // download the pdf
   doc.save("canvas.pdf");
 };

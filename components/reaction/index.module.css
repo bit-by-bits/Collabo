@@ -1,0 +1,61 @@
+.goUp0,
+.goUp1,
+.goUp2 {
+  opacity: 0;
+  animation:
+    goUpAnimation 2s,
+    fadeOut 2s;
+}
+
+.leftRight0,
+.leftRight1,
+.leftRight2 {
+  animation: leftRightAnimation 0.3s alternate infinite ease-in-out;
+}
+
+.goUp0 {
+  --translation-y: -400px;
+}
+.goUp1 {
+  --translation-y: -300px;
+}
+.goUp2 {
+  --translation-y: -200px;
+}
+
+.leftRight0 {
+  --translation-x: 50px;
+}
+.leftRight1 {
+  --translation-x: 100px;
+}
+.leftRight2 {
+  --translation-x: -50px;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes goUpAnimation {
+  from {
+    transform: translate(0px, 0px);
+  }
+  to {
+    transform: translate(0px, var(--translation-y, -400px));
+  }
+}
+
+@keyframes leftRightAnimation {
+  from {
+    transform: translate(0px, 0px);
+  }
+  to {
+    transform: translate(var(--translation-x, 50px), 0px);
+  }
+}

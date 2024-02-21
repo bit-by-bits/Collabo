@@ -10,8 +10,8 @@ import {
   CanvasPathCreated,
   CanvasSelectionCreated,
   RenderCanvas,
-} from "@/types";
-import { defaultNavElement } from "@/constants";
+} from "@/helpers/types";
+import { defaultNavElement } from "@/helpers/constants";
 import { createSpecificShape } from "./shapes";
 
 export const initializeFabric = ({
@@ -64,7 +64,7 @@ export const handleCanvasMouseDown = ({
     isDrawing.current = true;
     shapeRef.current = createSpecificShape(
       selectedShapeRef.current,
-      pointer as any,
+      pointer as any
     );
 
     if (shapeRef.current) canvas.add(shapeRef.current);
@@ -124,7 +124,6 @@ export const handleCanvaseMouseMove = ({
   if (shapeRef.current?.objectId) syncShapeInStorage(shapeRef.current);
 };
 
-// handle mouse up event on canvas to stop drawing shapes
 export const handleCanvasMouseUp = ({
   canvas,
   isDrawing,
@@ -181,8 +180,8 @@ export const handleCanvasObjectMoving = ({
       0,
       Math.min(
         target.left,
-        (canvas.width || 0) - (target.getScaledWidth() || target.width || 0),
-      ),
+        (canvas.width || 0) - (target.getScaledWidth() || target.width || 0)
+      )
     );
   }
 
@@ -191,8 +190,8 @@ export const handleCanvasObjectMoving = ({
       0,
       Math.min(
         target.top,
-        (canvas.height || 0) - (target.getScaledHeight() || target.height || 0),
-      ),
+        (canvas.height || 0) - (target.getScaledHeight() || target.height || 0)
+      )
     );
   }
 };
@@ -203,7 +202,7 @@ export const handleCanvasSelectionCreated = ({
   setElementAttributes,
 }: CanvasSelectionCreated) => {
   if (isEditingRef.current || !options?.selected) return;
-
+  
   const selectedElement = options?.selected[0] as fabric.Object;
 
   if (selectedElement && options.selected.length === 1) {
@@ -270,7 +269,7 @@ export const renderCanvas = ({
           fabricRef.current?.add(enlivenedObj);
         });
       },
-      "fabric",
+      "fabric"
     );
   });
 
@@ -279,9 +278,7 @@ export const renderCanvas = ({
 
 export const handleResize = ({ canvas }: { canvas: fabric.Canvas | null }) => {
   const canvasElement = document.getElementById("canvas");
-  if (!canvasElement) return;
-
-  if (!canvas) return;
+  if (!canvasElement || !canvas) return;
 
   canvas.setDimensions({
     width: canvasElement.clientWidth,
@@ -296,15 +293,10 @@ export const handleCanvasZoom = ({
   options: fabric.IEvent & { e: WheelEvent };
   canvas: fabric.Canvas;
 }) => {
-  const delta = options.e?.deltaY;
   let zoom = canvas.getZoom();
+  const delta = options.e?.deltaY;
 
-  const minZoom = 0.2;
-  const maxZoom = 1;
-  const zoomStep = 0.001;
-
-  zoom = Math.min(Math.max(minZoom, zoom + delta * zoomStep), maxZoom);
-
+  zoom = Math.min(Math.max(0.2, zoom + delta * 0.001), 1);
   canvas.zoomToPoint({ x: options.e.offsetX, y: options.e.offsetY }, zoom);
 
   options.e.preventDefault();
