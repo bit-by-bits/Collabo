@@ -4,10 +4,13 @@
 
 @import "@liveblocks/react-comments/styles.css";
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 * {
-  font-family:
-    work sans,
-    sans-serif;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 @layer utilities {

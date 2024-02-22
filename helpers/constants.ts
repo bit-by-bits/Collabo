@@ -1,4 +1,4 @@
-export const icon = (text: string) => `/assets/${text}.svg`;
+export const icon = (text: string) => `/${text}.svg`;
 
 export const colors = ["#DC2626", "#D97706", "#059669", "#7C3AED", "#DB2777"];
 
@@ -35,12 +35,14 @@ export const shapeElements = [
   },
 ];
 
+export const defaultNavElement = {
+  icon: icon("select"),
+  name: "Select",
+  value: "select",
+};
+
 export const navElements = [
-  {
-    icon: icon("select"),
-    name: "Select",
-    value: "select",
-  },
+  defaultNavElement,
   {
     icon: icon("rectangle"),
     name: "Rectangle",
@@ -67,8 +69,6 @@ export const navElements = [
     value: "comments",
   },
 ];
-
-export const defaultNavElement = navElements[0];
 
 export const directionOptions = [
   { label: "Bring to Front", value: "front", icon: icon("front") },

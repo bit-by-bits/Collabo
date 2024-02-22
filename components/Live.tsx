@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   useBroadcastEvent,
   useMyPresence,
   useOthers,
 } from "@/liveblocks.config";
-import useInterval from "@/hooks/useInterval";
 import { CursorMode, CursorState, Reaction } from "@/helpers/types";
 import {
   ContextMenu,
@@ -37,9 +36,28 @@ const Live = ({ canvas, undo, redo }: Props) => {
     setCursorState({ mode: CursorMode.Reaction, reaction, isPressed: false });
   }, []);
 
+  const useInterval = (callback: () => void, delay: number | null) => {
+    const savedCallback = useRef<() => void>(callback);
+
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+      const tick = () => {
+        savedCallback.current();
+      };
+
+      if (delay !== null) {
+        const id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  };
+
   useInterval(() => {
     setReactions((reactions) =>
-      reactions.filter((reaction) => reaction.timestamp > Date.now() - 4000),
+      reactions.filter((reaction) => reaction.timestamp > Date.now() - 4000)
     );
   }, 1000);
 
@@ -56,7 +74,7 @@ const Live = ({ canvas, undo, redo }: Props) => {
             value: cursorState.reaction,
             timestamp: Date.now(),
           },
-        ]),
+        ])
       );
       broadcast({ x: cursor.x, y: cursor.y, value: cursorState.reaction });
     }
@@ -102,7 +120,7 @@ const Live = ({ canvas, undo, redo }: Props) => {
         updateMyPresence({ cursor: { x, y } });
       }
     },
-    [cursor, cursorState.mode, updateMyPresence],
+    [cursor, cursorState.mode, updateMyPresence]
   );
 
   const handlePointerLeave = useCallback(() => {
@@ -118,17 +136,17 @@ const Live = ({ canvas, undo, redo }: Props) => {
       setCursorState((state: CursorState) =>
         cursorState.mode === CursorMode.Reaction
           ? { ...state, isPressed: true }
-          : state,
+          : state
       );
     },
-    [cursorState.mode, updateMyPresence],
+    [cursorState.mode, updateMyPresence]
   );
 
   const handlePointerUp = useCallback(() => {
     setCursorState((state: CursorState) =>
       cursorState.mode === CursorMode.Reaction
         ? { ...state, isPressed: false }
-        : state,
+        : state
     );
   }, [cursorState.mode]);
 
@@ -155,7 +173,7 @@ const Live = ({ canvas, undo, redo }: Props) => {
           break;
       }
     },
-    [redo, undo, setCursorState],
+    [redo, undo, setCursorState]
   );
 
   return (

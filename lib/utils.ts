@@ -52,19 +52,19 @@ interface ShapeInfo {
 }
 
 const shapeInfoMap: Record<string, ShapeInfo> = {
-  rect: { icon: "/assets/rectangle.svg", name: "Rectangle" },
-  circle: { icon: "/assets/circle.svg", name: "Circle" },
-  triangle: { icon: "/assets/triangle.svg", name: "Triangle" },
-  line: { icon: "/assets/line.svg", name: "Line" },
-  "i-text": { icon: "/assets/text.svg", name: "Text" },
-  image: { icon: "/assets/image.svg", name: "Image" },
-  freeform: { icon: "/assets/freeform.svg", name: "Free Drawing" },
+  rect: { icon: "/rectangle.svg", name: "Rectangle" },
+  circle: { icon: "/circle.svg", name: "Circle" },
+  triangle: { icon: "/triangle.svg", name: "Triangle" },
+  line: { icon: "/line.svg", name: "Line" },
+  "i-text": { icon: "/text.svg", name: "Text" },
+  image: { icon: "/image.svg", name: "Image" },
+  freeform: { icon: "/freeform.svg", name: "Free Drawing" },
 };
 
 export const getShapeInfo = (shapeType: string): ShapeInfo => {
   return (
     shapeInfoMap[shapeType] || {
-      icon: "/assets/rectangle.svg",
+      icon: "/rectangle.svg",
       name: shapeType,
     }
   );

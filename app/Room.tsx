@@ -3,14 +3,14 @@
 import { LiveMap } from "@liveblocks/client";
 import { ClientSideSuspense } from "@liveblocks/react";
 import { RoomProvider } from "@/liveblocks.config";
-import Loader from "@/components/shared/Loader";
+import Loader from "@/components/Loader";
 
 const Room = ({ children }: { children: React.ReactNode }) => {
   return (
     <RoomProvider
       id="collabo"
-      initialPresence={{ cursor: null, cursorColor: null, editingText: null }}
       initialStorage={{ canvasObjects: new LiveMap() }}
+      initialPresence={{ cursor: null, cursorColor: null, editingText: null }}
     >
       <ClientSideSuspense fallback={<Loader />}>
         {() => children}

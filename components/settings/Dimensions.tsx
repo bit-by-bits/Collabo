@@ -26,7 +26,7 @@ const Dimensions: React.FC<Props> = ({
 }) => {
   const handleChange = (
     property: string,
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     handleInputChange(property, e.target.value);
   };
@@ -53,8 +53,8 @@ const Dimensions: React.FC<Props> = ({
               value={item.property === "width" ? width : height}
               className="input-ring"
               min={10}
-              onChange={(e) => handleChange(item.property, e)}
               onBlur={handleBlur}
+              onChange={(e) => handleChange(item.property, e)}
             />
           </div>
         ))}

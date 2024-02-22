@@ -18,18 +18,19 @@ import {
   renderCanvas,
 } from "@/lib/canvas";
 import { handleDelete, handleKeyDown } from "@/lib/key-events";
-import Navbar from "@/components/shared/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import Leftbar from "@/components/sidebar/Leftbar";
 import Rightbar from "@/components/sidebar/Rightbar";
 import Live from "@/components/Live";
 import { ActiveElement, Attributes } from "@/helpers/types";
 import { handleImageUpload } from "@/lib/shapes";
+import { defaultNavElement } from "@/helpers/constants";
 
 const Home = () => {
   const undo = useUndo();
   const redo = useRedo();
 
-  const canvasObjects = useStorage((root) => root.canvasObjects);
+  const canvasObjects = useStorage((root) => root?.canvasObjects);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fabricRef = useRef<fabric.Canvas | null>(null);
@@ -43,6 +44,10 @@ const Home = () => {
   const activeObjectRef = useRef<fabric.Object | null>(null);
 
   const imageInputRef = useRef<HTMLInputElement>(null);
+
+  console.log(
+    `shape: ${shapeRef.current}, selected: ${selectedShapeRef.current}, isDrawing: ${isDrawingRef.current}, isEditing: ${isEditingRef.current}, activeObject: ${activeObjectRef.current}, imageInput: ${imageInputRef.current}`
+  );
 
   const [activeElement, setActiveElement] = useState<ActiveElement>({
     name: "",
@@ -69,8 +74,9 @@ const Home = () => {
     const canvasObjects = storage.get("canvasObjects");
     if (!canvasObjects || canvasObjects.size === 0) return true;
 
-    for (const [key, value] of canvasObjects.entries())
-      canvasObjects.delete(key);
+    const entries = Array.from(canvasObjects.entries());
+    for (const [key, value] of entries) canvasObjects.delete(key);
+
     return canvasObjects.size === 0;
   }, []);
 
@@ -212,7 +218,7 @@ const Home = () => {
         })
       );
     };
-  }, [deleteShapeFromStorage, redo, syncShapeInStorage, undo]);
+  }, [canvasRef]);
 
   useEffect(() => {
     renderCanvas({ fabricRef, canvasObjects, activeObjectRef });

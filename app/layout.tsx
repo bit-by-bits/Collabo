@@ -1,9 +1,12 @@
 import "./globals.css";
 import Room from "./Room";
-import { Inter } from "next/font/google";
+import { Inter, Work_Sans } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-const inter = Inter({ subsets: ["latin"] });
+const wsans = Work_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata = {
   title: "Collabo",
@@ -12,7 +15,7 @@ export const metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en">
-    <body className={`${inter.className} bg-primary-grey-200 text-white`}>
+    <body className={`${wsans.className} bg-primary-grey-200 text-white`}>
       <Room>
         <TooltipProvider>{children}</TooltipProvider>
       </Room>

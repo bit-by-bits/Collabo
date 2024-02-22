@@ -64,7 +64,7 @@ export const handleCanvasMouseDown = ({
     isDrawing.current = true;
     shapeRef.current = createSpecificShape(
       selectedShapeRef.current,
-      pointer as any,
+      pointer as any
     );
 
     if (shapeRef.current) canvas.add(shapeRef.current);
@@ -180,8 +180,8 @@ export const handleCanvasObjectMoving = ({
       0,
       Math.min(
         target.left,
-        (canvas.width || 0) - (target.getScaledWidth() || target.width || 0),
-      ),
+        (canvas.width || 0) - (target.getScaledWidth() || target.width || 0)
+      )
     );
   }
 
@@ -190,8 +190,8 @@ export const handleCanvasObjectMoving = ({
       0,
       Math.min(
         target.top,
-        (canvas.height || 0) - (target.getScaledHeight() || target.height || 0),
-      ),
+        (canvas.height || 0) - (target.getScaledHeight() || target.height || 0)
+      )
     );
   }
 };
@@ -269,7 +269,7 @@ export const renderCanvas = ({
           fabricRef.current?.add(enlivenedObj);
         });
       },
-      "fabric",
+      "fabric"
     );
   });
 

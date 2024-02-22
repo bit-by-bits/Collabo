@@ -1,20 +1,29 @@
-import { createClient } from "@liveblocks/client";
+import { LiveMap, createClient } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
 
 // Create Liveblocks client
 const client = createClient({
+  throttle: 16,
   publicApiKey: process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_API_KEY!,
 });
 
 // Define types
+
+type Storage = {
+  canvasObjects: LiveMap<string, any>;
+};
+
 type Presence = {};
-type Storage = {};
 type UserMeta = {};
 type RoomEvent = {};
 
 // Define thread metadata type
 export type ThreadMetadata = {
+  x: number;
+  y: number;
+  resolved: boolean;
   zIndex: number;
+  time?: number;
 };
 
 // Create room context and export related hooks
