@@ -40,7 +40,7 @@ export type CursorChatProps = {
       cursor: { x: number; y: number };
       cursorColor: string;
       message: string;
-    }>,
+    }>
   ) => void;
 };
 
@@ -137,11 +137,11 @@ export type RenderCanvas = {
 };
 
 export type RightSidebarProps = {
-  elementAttributes: Attributes;
-  setElementAttributes: Dispatch<SetStateAction<Attributes>>;
-  fabricRef: MutableRefObject<fabric.Canvas | null>;
-  activeObjectRef: MutableRefObject<fabric.Object | null>;
-  isEditingRef: MutableRefObject<boolean>;
+  attributes: Attributes;
+  setAttributes: Dispatch<SetStateAction<Attributes>>;
+  fabric: MutableRefObject<fabric.Canvas | null>;
+  activeObject: MutableRefObject<fabric.Object | null>;
+  isEditing: MutableRefObject<boolean>;
   syncShapeInStorage: (obj: any) => void;
 };
 

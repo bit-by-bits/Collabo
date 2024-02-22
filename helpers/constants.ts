@@ -48,23 +48,23 @@ export const navElements = [
   },
   {
     icon: icon("text"),
-    value: "text",
     name: "Text",
+    value: "text",
   },
   {
     icon: icon("delete"),
-    value: "delete",
     name: "Delete",
+    value: "delete",
   },
   {
     icon: icon("reset"),
-    value: "reset",
     name: "Reset",
+    value: "reset",
   },
   {
     icon: icon("comments"),
-    value: "comments",
     name: "Comments",
+    value: "comments",
   },
 ];
 
