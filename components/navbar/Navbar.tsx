@@ -81,5 +81,5 @@ const Navbar = ({
 
 export default memo(
   Navbar,
-  (prevProps, nextProps) => prevProps.activeElement === nextProps.activeElement
+  (prevProps, nextProps) => prevProps.activeElement === nextProps.activeElement,
 );

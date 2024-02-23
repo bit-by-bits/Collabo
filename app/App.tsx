@@ -46,7 +46,7 @@ const Home = () => {
   const imageInputRef = useRef<HTMLInputElement>(null);
 
   console.log(
-    `shape: ${shapeRef.current}, selected: ${selectedShapeRef.current}, isDrawing: ${isDrawingRef.current}, isEditing: ${isEditingRef.current}, activeObject: ${activeObjectRef.current}, imageInput: ${imageInputRef.current}`
+    `shape: ${shapeRef.current}, selected: ${selectedShapeRef.current}, isDrawing: ${isDrawingRef.current}, isEditing: ${isEditingRef.current}, activeObject: ${activeObjectRef.current}, imageInput: ${imageInputRef.current}`,
   );
 
   const [activeElement, setActiveElement] = useState<ActiveElement>({
@@ -198,7 +198,7 @@ const Home = () => {
         redo,
         syncShapeInStorage,
         deleteShapeFromStorage,
-      })
+      }),
     );
 
     return () => {
@@ -215,7 +215,7 @@ const Home = () => {
           redo,
           syncShapeInStorage,
           deleteShapeFromStorage,
-        })
+        }),
       );
     };
   }, [canvasRef]);

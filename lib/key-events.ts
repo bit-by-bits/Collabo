@@ -15,7 +15,7 @@ export const handleCopy = (canvas: fabric.Canvas): fabric.Object[] => {
 // Handle pasting objects from clipboard onto canvas
 export const handlePaste = (
   canvas: fabric.Canvas,
-  syncShapeInStorage: (shape: fabric.Object) => void
+  syncShapeInStorage: (shape: fabric.Object) => void,
 ) => {
   const clipboardData = localStorage.getItem("clipboard");
   if (!clipboardData) return;
@@ -38,7 +38,7 @@ export const handlePaste = (
           });
           canvas.renderAll();
         },
-        "fabric"
+        "fabric",
       );
     });
   } catch (error) {
@@ -49,7 +49,7 @@ export const handlePaste = (
 // Handle deleting selected objects from canvas
 export const handleDelete = (
   canvas: fabric.Canvas,
-  deleteShapeFromStorage: (id: string) => void
+  deleteShapeFromStorage: (id: string) => void,
 ) => {
   const activeObjects = canvas.getActiveObjects();
   activeObjects.forEach((obj: CustomFabricObject<any>) => {
