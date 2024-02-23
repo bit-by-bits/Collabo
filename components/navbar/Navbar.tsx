@@ -27,7 +27,7 @@ const Navbar = ({
 
   return (
     <nav className="flex select-none items-center justify-between gap-4 bg-primary-black px-5 text-white">
-      <Image src="/logo.png" alt="Collabo" width={60} height={20} />
+      <Image src="/logo.png" alt="Collabo" width={90} height={30} />
 
       <ul className="flex flex-row">
         {navElements.map((item: ActiveElement | any) => {
@@ -67,7 +67,7 @@ const Navbar = ({
                 </li>
               </TooltipTrigger>
               <TooltipContent className="border-none bg-primary-black px-2.5 py-1.5 text-xs">
-                {item.name}
+                {item.name === "Rectangle" ? "Shapes" : item.name}
               </TooltipContent>
             </Tooltip>
           );

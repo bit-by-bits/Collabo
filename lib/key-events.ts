@@ -31,7 +31,7 @@ export const handlePaste = (
               left: (enlivenedObj.left || 0) + 20,
               top: (enlivenedObj.top || 0) + 20,
               objectId: uuidv4(),
-              fill: "#aabbcc",
+              fill: "#d9d9d9",
             } as CustomFabricObject<any>);
             canvas.add(enlivenedObj);
             syncShapeInStorage(enlivenedObj);
@@ -79,6 +79,22 @@ export const handleKeyDown = ({
   deleteShapeFromStorage: (id: string) => void;
 }) => {
   switch (e.key) {
+    case "a": // Ctrl + A (Select All)
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        canvas.discardActiveObject();
+        canvas.requestRenderAll();
+        const allObjects = canvas.getObjects();
+        if (allObjects.length > 0) {
+          const activeSelection = new fabric.ActiveSelection(allObjects, {
+            canvas,
+            ...fabric.Object.prototype,
+          });
+          canvas.setActiveObject(activeSelection);
+          canvas.requestRenderAll();
+        }
+      }
+      break;
     case "c": // Ctrl + C (Copy)
       if (e.ctrlKey || e.metaKey) handleCopy(canvas);
       break;

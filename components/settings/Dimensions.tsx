@@ -7,8 +7,8 @@ type DimensionOption = {
 };
 
 const dimensionsOptions: DimensionOption[] = [
-  { label: "W", property: "width" },
-  { label: "H", property: "height" },
+  { label: "Width", property: "width" },
+  { label: "Height", property: "height" },
 ];
 
 type Props = {
@@ -36,14 +36,15 @@ const Dimensions: React.FC<Props> = ({
   };
 
   return (
-    <section className="flex flex-col border-b border-primary-grey-200">
-      <div className="flex flex-col gap-4 px-6 py-3">
+    <section className="flex flex-col gap-3 border-b border-primary-grey-200 p-5">
+      <h3 className="text-xs uppercase">Dimensions</h3>
+      <div className="flex flex-col">
         {dimensionsOptions.map((item) => (
           <div
             key={item.label}
             className="flex flex-1 items-center gap-3 rounded-sm"
           >
-            <Label htmlFor={item.property} className="text-[10px] font-bold">
+            <Label htmlFor={item.property} className="text-xs font-bold">
               {item.label}
             </Label>
             <Input

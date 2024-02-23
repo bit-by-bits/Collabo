@@ -33,10 +33,10 @@ const Rightbar = ({
 
   const memoizedContent = useMemo(() => {
     return (
-      <section className="flex flex-col border-t border-primary-grey-200 bg-primary-black text-primary-grey-300 min-w-[227px] sticky right-0 h-full max-sm:hidden select-none overflow-y-auto pb-16">
+      <section className="flex flex-col border-t border-primary-grey-200 bg-primary-black text-white min-w-[227px] sticky right-0 h-full max-sm:hidden select-none overflow-y-auto pb-16">
         <h3 className=" px-5 pt-4 text-xs uppercase">Design</h3>
-        <span className="text-xs text-primary-grey-300 mt-3 px-5 border-b border-primary-grey-200 pb-4">
-          Make changes to canvas as you like
+        <span className="text-sm text-white mt-3 px-5 border-b border-primary-grey-200 pb-4">
+          Change the canvas as you like!
         </span>
 
         <Dimensions

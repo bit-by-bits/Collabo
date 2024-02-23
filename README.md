@@ -12,7 +12,7 @@ Collabo is a real-time collaborative design tool, heavily inspired by Figma, tha
 
 ## Technologies Used
 
-- [Next.js](https://nextjs.org/): A React framework for building server-rendered applications.  
+- [Next.js](https://nextjs.org/): A React framework for building server-rendered applications.
 - [Liveblocks](https://liveblocks.io/): Real-time collaboration API for building collaborative applications.
 - [Fabric.js](http://fabricjs.com/): A powerful and simple HTML5 canvas library.
 - [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for quickly building custom designs.

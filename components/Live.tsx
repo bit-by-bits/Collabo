@@ -220,7 +220,7 @@ const Live = ({ canvas, undo, redo }: Props) => {
             onClick={() => handleContextMenuClick(item.name)}
           >
             <p>{item.name}</p>
-            <p className="text-xs text-primary-grey-300">{item.shortcut}</p>
+            <p className="text-xs text-white">{item.shortcut}</p>
           </ContextMenuItem>
         ))}
       </ContextMenuContent>

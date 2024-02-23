@@ -37,17 +37,12 @@ const Home = () => {
 
   const shapeRef = useRef<fabric.Object | null>(null);
   const selectedShapeRef = useRef<string | null>(null);
+  const activeObjectRef = useRef<fabric.Object | null>(null);
 
   const isDrawingRef = useRef(false);
   const isEditingRef = useRef(false);
 
-  const activeObjectRef = useRef<fabric.Object | null>(null);
-
   const imageInputRef = useRef<HTMLInputElement>(null);
-
-  console.log(
-    `shape: ${shapeRef.current}, selected: ${selectedShapeRef.current}, isDrawing: ${isDrawingRef.current}, isEditing: ${isEditingRef.current}, activeObject: ${activeObjectRef.current}, imageInput: ${imageInputRef.current}`,
-  );
 
   const [activeElement, setActiveElement] = useState<ActiveElement>({
     name: "",
@@ -61,8 +56,8 @@ const Home = () => {
     fontSize: "",
     fontFamily: "",
     fontWeight: "",
-    fill: "#aabbcc",
-    stroke: "#aabbcc",
+    fill: "#d9d9d9",
+    stroke: "#d9d9d9",
   });
 
   const deleteShapeFromStorage = useMutation(({ storage }, shapeId) => {

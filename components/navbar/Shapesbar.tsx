@@ -21,7 +21,10 @@ const Shapesbar = ({
     setIsDropdownElem(!isDropdownElem);
   };
 
-  console.log(isDropdownElem, "a", activeElement.icon, "b", item.icon);
+  const imageSrc =
+    activeElement?.icon && activeElement?.value !== "select"
+      ? activeElement?.icon
+      : item?.icon;
 
   return (
     <>
@@ -32,10 +35,10 @@ const Shapesbar = ({
             onClick={() => handleActiveElement(item)}
           >
             <Image
-              src={isDropdownElem ? activeElement.icon : item.icon}
-              alt={item.name}
               fill
-              className={isDropdownElem ? "invert" : ""}
+              src={imageSrc}
+              alt={item.name}
+              className={imageSrc === activeElement?.icon ? "invert" : ""}
             />
           </Button>
         </DropdownMenuTrigger>

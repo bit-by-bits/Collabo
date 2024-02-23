@@ -39,7 +39,7 @@ const Text = ({
   handleInputChange,
 }: TextProps) => (
   <div className="flex flex-col gap-3 border-b border-primary-grey-200 px-5 py-3">
-    <h3 className="text-[10px] uppercase">Text</h3>
+    <h3 className="text-xs uppercase">Text</h3>
 
     <div className="flex flex-col gap-3">
       {selectConfigs.map((config) => (
@@ -82,7 +82,7 @@ const RenderSelect = ({
     <SelectTrigger className="no-ring w-full rounded-sm border border-primary-grey-200">
       <SelectValue placeholder={config.placeholder} />
     </SelectTrigger>
-    <SelectContent className="border-primary-grey-200 bg-primary-black text-primary-grey-300">
+    <SelectContent className="border-primary-grey-200 bg-primary-black text-white">
       {config.options.map((option) => (
         <SelectItem
           key={option.value}

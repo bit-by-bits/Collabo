@@ -14,7 +14,7 @@ const createRectangle = (pointer: PointerEvent) =>
     top: pointer.y,
     width: 100,
     height: 100,
-    fill: "#aabbcc",
+    fill: "#d9d9d9",
     objectId: uuidv4(),
   } as CustomFabricObject<fabric.Rect>);
 
@@ -25,7 +25,7 @@ const createTriangle = (pointer: PointerEvent) =>
     top: pointer.y,
     width: 100,
     height: 100,
-    fill: "#aabbcc",
+    fill: "#d9d9d9",
     objectId: uuidv4(),
   } as CustomFabricObject<fabric.Triangle>);
 
@@ -35,14 +35,14 @@ const createCircle = (pointer: PointerEvent) =>
     left: pointer.x,
     top: pointer.y,
     radius: 100,
-    fill: "#aabbcc",
+    fill: "#d9d9d9",
     objectId: uuidv4(),
   } as any);
 
 // Function to create a line shape
 const createLine = (pointer: PointerEvent) =>
   new fabric.Line([pointer.x, pointer.y, pointer.x + 100, pointer.y + 100], {
-    stroke: "#aabbcc",
+    stroke: "#d9d9d9",
     strokeWidth: 2,
     objectId: uuidv4(),
   } as CustomFabricObject<fabric.Line>);
@@ -52,7 +52,7 @@ const createText = (pointer: PointerEvent, text: string) =>
   new fabric.IText(text, {
     left: pointer.x,
     top: pointer.y,
-    fill: "#aabbcc",
+    fill: "#d9d9d9",
     fontFamily: "Helvetica",
     fontSize: 36,
     fontWeight: "400",
